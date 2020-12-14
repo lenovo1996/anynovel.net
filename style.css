@@ -1,0 +1,128 @@
+body {
+    margin: auto;
+    width: 768px;
+}
+
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+
+@media only screen and (max-width: 768px) {
+
+    /* For mobile phones: */
+    body {
+        width: 100%;
+    }
+}
+
+div.container {
+    position: relative;
+    min-height: 100vh;
+}
+
+body {
+    background: #333;
+    color: gray;
+    min-height: 100vh;
+    font-family: 'Roboto Mono', monospace;
+}
+
+body.day {
+    background: #e4e4e4;
+}
+
+body.night {
+    background: #333;
+}
+
+section.header {
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+}
+
+section.footer {
+    height: 70px;
+    width: 100%;
+    line-height: 70px;
+    bottom: 0;
+    position: fixed;
+    z-index: 100;
+}
+
+.night section.header,
+.night section.footer {
+    background: #3e3e3e;
+}
+
+.day section.header,
+.day section.footer {
+    background: #d8d8d8;
+}
+
+.footer-content {
+    margin: 15px;
+}
+
+.header-content {
+    margin-left: 15px;
+}
+
+.footer-item {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.setting-icon {
+    background: url('./assets/icons/settings.svg');
+    height: 100%;
+    width: 100%;
+}
+
+
+.night .mode-icon {
+    background: url('./assets/icons/day.svg');
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+}
+
+
+.day .mode-icon {
+    background: url('./assets/icons/night.svg');
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.book-name {
+    line-height: 70px;
+    font-size: 20px;
+}
+
+section.body {
+    padding: 10px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    font-size: 20px;
+    line-height: 2;
+}
