@@ -1,4 +1,4 @@
-body {
+body, section.header, section.footer {
     margin: auto;
     width: 768px;
 }
@@ -14,7 +14,7 @@ pre {
 @media only screen and (max-width: 768px) {
 
     /* For mobile phones: */
-    body {
+    body, section.header, section.footer {
         width: 100%;
     }
 }
@@ -41,14 +41,12 @@ body.night {
 
 section.header {
     height: 70px;
-    width: 100%;
     position: fixed;
     z-index: 100;
 }
 
 section.footer {
     height: 70px;
-    width: 100%;
     line-height: 70px;
     bottom: 0;
     position: fixed;
