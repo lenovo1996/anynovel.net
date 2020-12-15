@@ -79,14 +79,14 @@ section.footer {
 }
 
 .setting-icon {
-    background: url('./assets/icons/settings.svg');
+    background: url('./icons/settings.svg');
     height: 100%;
     width: 100%;
 }
 
 
 .night .mode-icon {
-    background: url('./assets/icons/day.svg');
+    background: url('./icons/day.svg');
     background-size: contain;
     height: 100%;
     width: 100%;
@@ -94,7 +94,7 @@ section.footer {
 
 
 .day .mode-icon {
-    background: url('./assets/icons/night.svg');
+    background: url('./icons/night.svg');
     background-size: contain;
     height: 100%;
     width: 100%;
@@ -123,4 +123,12 @@ section.body {
     padding-bottom: 70px;
     font-size: 20px;
     line-height: 2;
+}
+
+section.setting-panel {
+    position: absolute;
+    bottom: 70px;
+    height: 200px;
+    background: #cecece;
+    width: 100%;
 }
