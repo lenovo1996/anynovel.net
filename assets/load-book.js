@@ -46,7 +46,7 @@ let Controller = {
 
         $.get('/storage/vi/' + book_id + '/sections/' + section_id + '/content.txt')
             .then(function (data) {
-                $('.chapter-content').html(data);
+                $('.chapter_content').html(data);
             });
     },
 
