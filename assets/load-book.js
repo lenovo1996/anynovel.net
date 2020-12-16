@@ -23,7 +23,6 @@ $(document).on("click", '.chapter-list-btn', function () {
 let Controller = {
     getBook() {
         Controller.loadInfo();
-        Controller.loadContent();
         Controller.loadChapterList();
     },
 
@@ -40,10 +39,14 @@ let Controller = {
             });
     },
 
-    loadContent() {
+    loadContent(param_id) {
         let route = Controller.getPath();
         let book_id = route[2];
         let section_id = route[3];
+
+        if (param_id) {
+            section_id = param_id;
+        }
 
         $.get('/storage/vi/' + book_id + '/sections/' + section_id + '/content.txt')
             .then(function (data) {
@@ -58,6 +61,12 @@ let Controller = {
 
         $.getJSON('/storage/vi/' + book_id + '/sections.json')
             .then(function (data) {
+                if (!section_id) {
+                    section_id = data[0].section_id;
+                }
+
+                Controller.loadContent(section_id);
+
                 let html = '';
                 $.each(data, function () {
                     html += `<div class="chapter section-${this.section_id}"><a href="/read/${book_id}/${this.section_id}">${this.title}</a></div>`;
