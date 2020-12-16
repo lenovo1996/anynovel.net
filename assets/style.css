@@ -1,4 +1,4 @@
-body, section.header, section.footer {
+body, section.header, section.footer, section {
     margin: auto;
     width: 768px;
 }
@@ -14,7 +14,7 @@ pre {
 @media only screen and (max-width: 768px) {
 
     /* For mobile phones: */
-    body, section.header, section.footer {
+    body, section.header, section.footer, section {
         width: 100%;
     }
 }
@@ -131,26 +131,38 @@ section.body {
 }
 
 section.setting-panel {
-    position: absolute;
+    position: fixed;
     bottom: 70px;
     height: 200px;
     background: #cecece;
-    width: 100%;
 }
 
 section.chapter-list {
-    position: absolute;
-    width: 100%;
+    position: fixed;
     top: 70px;
-    right: 0;
-    background: #dedede;
     padding-bottom: 70px;
+}
+
+.day section.chapter-list {
+    background: #dedede;
+}
+
+.night section.chapter-list {
+    background: #4b4b4b;
+}
+
+
+.day section.chapter {
+    border-bottom: 1px solid #cecdcd;
+}
+
+.night section.chapter {
+    border-bottom: 1px solid #5c5c5c;
 }
 
 .chapter {
     height: 50px;
     line-height: 50px;
-    border-bottom: 1px solid #cecdcd;
     color: gray;
     padding-left: 25px;
 }
@@ -159,7 +171,6 @@ section.chapter-list {
     color: gray;
     text-decoration: none;
 }
-
 
 .chapter.active {
     background: #a6a6a6;

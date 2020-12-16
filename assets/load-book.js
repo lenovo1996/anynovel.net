@@ -63,7 +63,7 @@ let Controller = {
                     html += `<div class="chapter section-${this.section_id}"><a href="/read/${book_id}/${this.section_id}">${this.title}</a></div>`;
                 });
                 $('.chapter-list').html(html);
-                $(`section-${section_id}`).addClass('active');
+                $(`.section-${section_id}`).addClass('active');
             });
     },
 
