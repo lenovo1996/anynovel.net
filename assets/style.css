@@ -180,6 +180,7 @@ section.chapter-list {
 .chapter a {
     color: gray;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .chapter.active {
