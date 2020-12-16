@@ -30,6 +30,7 @@ let Controller = {
         $.getJSON('/storage/vi/' + book_id + '/detail.json')
             .then(function (res) {
                 $('.book-name').text(res.data.book_name);
+                document.title = res.data.book_name;
             });
     },
 
@@ -38,11 +39,6 @@ let Controller = {
 
         let book_id = route[2];
         let section_id = route[3];
-
-        $.getJSON('/storage/vi/' + book_id + '/sections/' + section_id + '/detail.json')
-            .then(function (data) {
-                $('.chapter_title').text(data.title);
-            });
 
         $.get('/storage/vi/' + book_id + '/sections/' + section_id + '/content.txt')
             .then(function (data) {
