@@ -120,6 +120,7 @@ section.footer {
 .book-name {
     line-height: 70px;
     font-size: 20px;
+    margin-top: -15px;
 }
 
 section.body {
