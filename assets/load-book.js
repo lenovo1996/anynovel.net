@@ -1,57 +1,61 @@
 const routes = {
-  read: "getBook",
+    read: "getBook",
 };
 
 $(document).ready(function () {
-  let path = Controller.getPath();
+    let path = Controller.getPath();
 
-  let functionName = routes[path[1]];
+    let functionName = routes[path[1]];
 
-  if (typeof routes[pathSplit[1]] == "undefined") {
-    window.location.href = window.location.origin;
-  }
+    if (typeof routes[path[1]] == "undefined") {
+        window.location.href = window.location.origin;
+    }
 
-  Controller[functionName]();
+    Controller[functionName]();
 });
 
 let Controller = {
-  getBook() {
-    Controller.loadInfo();
-    Controller.loadContent();
-    Controller.loadChapter();
-  },
+    getBook() {
+        Controller.loadInfo();
+        Controller.loadContent();
+        Controller.loadChapterList();
+    },
 
 
-  loadInfo() {
-    let route = Controller.getPath();
+    loadInfo() {
+        let route = Controller.getPath();
 
-    let book_id = route[2];
+        let book_id = route[2];
 
-    $.get('./storage/vi/' + book_id + '/detail.json')
-    .then(function (data) {
-      
-    });
-  },
+        $.getJSON('./storage/vi/' + book_id + '/detail.json')
+            .then(function (res) {
+                $('.book-name').text(res.data.book_name);
+            });
+    },
 
-  loadContent() {
-    let route = Controller.getPath();
+    loadContent() {
+        let route = Controller.getPath();
 
-    let book_id = route[2];
-    let book_id = route[3];
+        let book_id = route[2];
+        let section_id = route[3];
 
-    $.get('./storage/vi/' + book_id + '/sections/'+section_id+'/detail.json')
-    .then(function (data) {
-      
-    });
+        $.getJSON('./storage/vi/' + book_id + '/sections/' + section_id + '/detail.json')
+            .then(function (data) {
+                $('.chapter_title').text(data.title);
+            });
 
-    $.get('./storage/vi/' + book_id + '/sections/'+section_id+'/content.txt')
-    .then(function (data) {
-      $('.chapter-content').html(data);
-    });
-  },
+        $.get('./storage/vi/' + book_id + '/sections/' + section_id + '/content.txt')
+            .then(function (data) {
+                $('.chapter-content').html(data);
+            });
+    },
 
-  getPath() {
-    let path = window.location.pathname;
-    return path.split("/");
-  }
+    loadChapterList() {
+
+    },
+
+    getPath() {
+        let path = window.location.pathname;
+        return path.split("/");
+    }
 };
