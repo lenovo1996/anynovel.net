@@ -63,7 +63,7 @@ section.footer {
     background: #d8d8d8;
 }
 
-.footer-content {
+.footer-content, .header-content {
     margin: 15px;
 }
 
@@ -71,7 +71,7 @@ section.footer {
     margin-left: 15px;
 }
 
-.footer-item {
+.footer-item, .header-item {
     height: 40px;
     width: 40px;
     display: inline-block;
@@ -84,6 +84,11 @@ section.footer {
     width: 100%;
 }
 
+.chapter-list-icon {
+    background: url('./icons/chapter-list.svg');
+    height: 100%;
+    width: 100%;
+}
 
 .night .mode-icon {
     background: url('./icons/day.svg');
@@ -131,4 +136,35 @@ section.setting-panel {
     height: 200px;
     background: #cecece;
     width: 100%;
+}
+
+section.chapter-list {
+    position: absolute;
+    width: 100%;
+    top: 70px;
+    right: 0;
+    background: #dedede;
+    padding-bottom: 70px;
+}
+
+.chapter {
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #cecdcd;
+    color: gray;
+    padding-left: 25px;
+}
+
+.chapter a {
+    color: gray;
+    text-decoration: none;
+}
+
+
+.chapter.active {
+    background: #a6a6a6;
+}
+
+.chapter.active a {
+    color: #f2ebeb;
 }
