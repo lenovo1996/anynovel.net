@@ -149,7 +149,6 @@ section.setting-panel {
 section.chapter-list {
     position: fixed;
     top: 50px;
-    width: 100%;
     padding-bottom: 50px;
     overflow: auto;
     height: 100%;
