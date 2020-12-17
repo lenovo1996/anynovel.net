@@ -150,9 +150,7 @@ section.chapter-list {
     position: fixed;
     top: 50px;
     bottom: 50px;
-    padding-bottom: 100px;
     overflow: auto;
-    height: 100%;
 }
 
 .day section.chapter-list {
