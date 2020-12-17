@@ -1,4 +1,4 @@
-body, section.header, section.footer, section {
+body, section.header, section.footer, section, section.chapter-list {
     margin: auto;
     width: 768px;
 }
@@ -14,7 +14,7 @@ pre {
 @media only screen and (max-width: 768px) {
 
     /* For mobile phones: */
-    body, section.header, section.footer, section {
+    body, section.header, section.footer, section, section.chapter-list {
         width: 100%;
     }
 }
