@@ -42,10 +42,10 @@ function setMode() {
 function autoScroll() {
     let isAutoScroll = Cookies.get("auto-scroll");
     if (isAutoScroll == 'true') {
-        $('body').animate({
+        $('html, body').animate({
             scrollTop: $(document).height() - $(window).height()
         }, 500000, 'linear');
     } else {
-        $('body').stop();
+        $('html, body').stop();
     }
 }
