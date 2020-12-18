@@ -17,7 +17,11 @@ $(document).ready(function () {
 });
 
 $(document).on("click", '.chapter-list-btn', function () {
-    $('.chapter-list').toggle();
+    if ($('.chapter-list').is(':hidden')) {
+        $('.chapter-list').fadeIn();
+    } else {
+        $('.chapter-list').fadeOut();
+    }
 });
 
 let Controller = {

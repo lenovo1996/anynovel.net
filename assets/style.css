@@ -1,4 +1,4 @@
-body, section.header, section.footer, section {
+body, section.header, section.footer, section, section.chapter-list {
     margin: auto;
     width: 768px;
 }
@@ -14,7 +14,7 @@ pre {
 @media only screen and (max-width: 768px) {
 
     /* For mobile phones: */
-    body, section.header, section.footer, section {
+    body, section.header, section.footer, section, section.chapter-list {
         width: 100%;
     }
 }
@@ -40,14 +40,14 @@ body.night {
 }
 
 section.header {
-    height: 70px;
+    height: 50px;
     position: fixed;
     z-index: 100;
 }
 
 section.footer {
-    height: 70px;
-    line-height: 70px;
+    height: 50px;
+    line-height: 50px;
     bottom: 0;
     position: fixed;
     z-index: 100;
@@ -58,13 +58,17 @@ section.footer {
     background: #3e3e3e;
 }
 
+.header-item {
+    margin: 10px;
+}
+
 .day section.header,
 .day section.footer {
     background: #d8d8d8;
 }
 
-.footer-content, .header-content {
-    margin: 15px;
+.footer-content {
+    margin: 10px;
 }
 
 .header-content {
@@ -72,8 +76,8 @@ section.footer {
 }
 
 .footer-item, .header-item {
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     display: inline-block;
     cursor: pointer;
 }
@@ -118,31 +122,35 @@ section.footer {
 }
 
 .book-name {
-    line-height: 70px;
+    line-height: 50px;
     font-size: 20px;
     margin-top: -15px;
+    white-space: nowrap;
 }
 
 section.body {
-    padding: 10px;
-    padding-top: 70px;
+    padding-top: 50px;
     padding-bottom: 70px;
     font-size: 20px;
     line-height: 2;
 }
 
+.chapter_content {
+    padding: 10px;
+}
+
 section.setting-panel {
     position: fixed;
-    bottom: 70px;
+    bottom: 50px;
     height: 200px;
     background: #cecece;
 }
 
 section.chapter-list {
-    position: absolute;
-    top: 70px;
-    width: 100%;
-    padding-bottom: 70px;
+    position: fixed;
+    top: 50px;
+    bottom: 50px;
+    overflow: auto;
 }
 
 .day section.chapter-list {
@@ -167,6 +175,9 @@ section.chapter-list {
     line-height: 50px;
     color: gray;
     padding-left: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .chapter a {
