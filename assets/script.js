@@ -1,16 +1,20 @@
 $(document).ready(function () {
     setMode();
-    autoScroll();
 
     let isAutoScroll = Cookies.get("auto-scroll") == 'true';
     if (isAutoScroll) {
         $('.setting').removeClass('auto-scroll');
+    } else {
+        $('.setting').addClass('auto-scroll');
     }
+
+    autoScroll();
 });
 
 $(document).on("click", ".setting", function () {
     let isNotAutoScroll = $(this).hasClass("auto-scroll");
     Cookies.set("auto-scroll", isNotAutoScroll, {expires: 365});
+    this.toggle('auto-scroll');
     autoScroll();
 });
 
