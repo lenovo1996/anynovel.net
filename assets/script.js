@@ -1,12 +1,17 @@
 $(document).ready(function () {
     setMode();
     autoScroll();
+
+    let isAutoScroll = Cookies.get("auto-scroll") == 'true';
+    if (isAutoScroll) {
+        $('.setting').removeClass('auto-scroll');
+    }
 });
 
 $(document).on("click", ".setting", function () {
-  let isNotAutoScroll = $(this).hasClass("auto-scroll-disabled");
-  Cookies.set("auto-scroll", isNotAutoScroll, {expires: 365});
-  autoScroll();
+    let isNotAutoScroll = $(this).hasClass("auto-scroll");
+    Cookies.set("auto-scroll", isNotAutoScroll, {expires: 365});
+    autoScroll();
 });
 
 $(document).on("click", ".switch-mode", function () {
@@ -21,12 +26,6 @@ $(document).on("click", ".switch-mode", function () {
         Cookies.set("mode", "day", {expires: 365});
         $("body").addClass("day");
     }
-});
-
-$(document).on("click", ".auto-scroll", function () {
-    let isNotAutoScroll = $(this).hasClass("auto-scroll-disabled");
-    Cookies.set("auto-scroll", isNotAutoScroll, {expires: 365});
-    autoScroll();
 });
 
 function setMode() {
