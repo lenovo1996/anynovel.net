@@ -77,6 +77,7 @@ foreach ($languages as $language) {
                 }
                 $section_list = file_get_contents($store_path . '/sections.json');
                 $section_list = []; // json_decode($section_list, true);
+                $new_chap_update_msg = file_get_contents('updated.txt');
                 foreach ($section_arr['data'] as $section) {
                     $section_id = $section['section_id'];
                     $section_title = $section['title'];
@@ -94,34 +95,38 @@ foreach ($languages as $language) {
                     ];
 
                     // if (!file_exists($section_path . '/' . $section_id)) {
-                        // save section and encrypt content
-                        if (!file_exists($section_path . '/' . $section_id)) {
-                            echo $prefix_log . ' Store book section [' . $section_id . ']: ' . $section_title . "\n";
-                            mkdir($section_path . '/' . $section_id, 0777, true);
-                            $encrypt_content = file_get_contents($section['osspath']);
-                            file_put_contents($section_path . '/' . $section_id . '/encrypt_content.txt', $encrypt_content);
-                            file_put_contents($section_path . '/' . $section_id . '/encrypt_key.txt', $section['amd5']);
-                            file_put_contents($section_path . '/' . $section_id . '/detail.json', json_encode($section));
-                        }
+                    // save section and encrypt content
+                    if (!file_exists($section_path . '/' . $section_id)) {
+                        echo $prefix_log . ' Store book section [' . $section_id . ']: ' . $section_title . "\n";
+                        mkdir($section_path . '/' . $section_id, 0777, true);
+                        $encrypt_content = file_get_contents($section['osspath']);
+                        file_put_contents($section_path . '/' . $section_id . '/encrypt_content.txt', $encrypt_content);
+                        file_put_contents($section_path . '/' . $section_id . '/encrypt_key.txt', $section['amd5']);
+                        file_put_contents($section_path . '/' . $section_id . '/detail.json', json_encode($section));
+                    }
 
-                        if (file_exists($section_path . '/' . $section_id . '/content.txt')) {
-                            continue;
-                        }
-                        
-                        echo $prefix_log . ' Decrypt [' . $section_id . ']: ' . $section_title . "\n";
-                        $content = decrypt_section($section_path . '/' . $section_id);
-                        $section_list[] = [
-                            'section_id' => $section_id,
-                            'title' => $section_title
-                        ];
-                        file_put_contents($section_path . '/' . $section_id . '/content.txt', $content);
-                        unlink($section_path . '/' . $section_id . '/encrypt_content.txt');
-                        unlink($section_path . '/' . $section_id . '/encrypt_key.txt');
-                        // TODO: send notify to user
+                    if (file_exists($section_path . '/' . $section_id . '/content.txt')) {
+                        continue;
+                    }
+
+                    echo $prefix_log . ' Decrypt [' . $section_id . ']: ' . $section_title . "\n";
+                    $content = decrypt_section($section_path . '/' . $section_id);
+                    $section_list[] = [
+                        'section_id' => $section_id,
+                        'title' => $section_title
+                    ];
+                    file_put_contents($section_path . '/' . $section_id . '/content.txt', $content);
+                    unlink($section_path . '/' . $section_id . '/encrypt_content.txt');
+                    unlink($section_path . '/' . $section_id . '/encrypt_key.txt');
+
+                    $new_chap_update_msg = "----------------\nTruyện *" . $book_name . "* Cập nhật!\n" . $section_title . "\nLink: https://anynovel.net/read/$book_id/$section_id";
+
+                    // TODO: send notify to user
 //                     } else {
 // //                        echo 'Existed book section: ' . $section_title . " => $section_path/$section_id\n";
 //                     }
                 }
+                file_put_contents('updated.txt', $new_chap_update_msg);
 
                 file_put_contents($store_path . '/sections.json', json_encode($section_list));
             }
