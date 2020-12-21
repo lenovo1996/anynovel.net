@@ -192,3 +192,108 @@ section.chapter-list {
 .chapter.active a {
     color: #f2ebeb;
 }
+
+.book-detail {
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 5px;
+    background: #222222;
+    margin-bottom: 15px;
+}
+
+.thumbnail {
+    width: 30%;
+    float: left;
+}
+
+.thumbnail img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.book-list {
+    display: block;
+    min-height: 100vh;
+    margin: 10px;
+}
+
+.detail.right {
+    width: 65%;
+    padding-left: 10px;
+    font-size: 15px;
+}
+
+.book-info-name a {
+    color: #d7d7d7;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+}
+
+span.last-section a {
+    font-size: 12px;
+    color: #c7c7c7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+}
+
+.update-time {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.tag {
+    background: #607D8B;
+    display: inline-block;
+    padding: 0 10px;
+    border-radius: 5px;
+    color: #d5d4d4;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+div.label {
+    background: #795548;
+    display: inline-block;
+    padding: 0 10px;
+    border-radius: 5px;
+    color: #d5d4d4;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.book-info {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+}
+
+div.score {
+    background: #007eff;
+}
+
+.book-search {
+    margin: 10px;
+}
+
+input.input-search {
+    height: 30px;
+    width: 100%;
+    width: -webkit-fill-available;
+    background: #222222;
+    border: 1px solid gray;
+    border-radius: 16px;
+    padding-left: 15px;
+    outline: none;
+    color: #bdbdbd;
+}

@@ -14,6 +14,9 @@ foreach ($argv as $arg) {
 }
 $languages = ['vi', 'id', 'th', 'ru', 'en'];
 $channels = [1, 2];
+
+$book_list_data = [];
+
 foreach ($languages as $language) {
     if (isset($_GET['lang']) && $language != $_GET['lang']) {
         continue;
@@ -60,6 +63,19 @@ foreach ($languages as $language) {
                 }
 
                 echo $prefix_log . ' Store book detail: ' . $book_name . "\n";
+
+                $book_list_data[$book_id] = [
+                    'book_id' => $book_id,
+                    'title' => $book_name,
+                    'image' => $book_arr['data']['book_pic'],
+                    'author' => $book_arr['data']['writer_name'],
+                    'category' => $book_arr['data']['category_name'],
+                    'label' => $book_arr['data']['label_name'],
+                    'score' => $book_arr['data']['score'],
+                    'section_update_time' => date('H:i d/m/Y', $book_arr['data']['section_update_time']),
+                    'section' => []
+                ];
+
                 file_put_contents($store_path . '/detail.json', json_encode($book_arr));
                 if (!file_exists($store_path . '/sections.json')) {
                     file_put_contents($store_path . '/sections.json', json_encode([]));
@@ -81,6 +97,11 @@ foreach ($languages as $language) {
                 foreach ($section_arr['data'] as $section) {
                     $section_id = $section['section_id'];
                     $section_title = $section['title'];
+
+                    $book_list_data[$book_id]['section'] = [
+                        'section_id' => $section_id,
+                        'title' => $section_title
+                    ];
 
                     if (empty($section['osspath'])) {
                         echo "-----------------\n";
@@ -128,11 +149,13 @@ foreach ($languages as $language) {
                 }
                 file_put_contents('updated.txt', $new_chap_update_msg);
 
+
                 file_put_contents($store_path . '/sections.json', json_encode($section_list));
             }
             $page++;
         }
     }
+    file_put_contents('../storage/' . $language . '/book_list.json', json_encode($book_list_data));
 }
 
 function scurl($path, $fields = false, $request_headers = [])
