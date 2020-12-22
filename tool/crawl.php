@@ -118,8 +118,10 @@ foreach ($languages as $language) {
                     // if (!file_exists($section_path . '/' . $section_id)) {
                     // save section and encrypt content
                     if (!file_exists($section_path . '/' . $section_id)) {
-                        echo $prefix_log . ' Store book section [' . $section_id . ']: ' . $section_title . "\n";
                         mkdir($section_path . '/' . $section_id, 0777, true);
+                    }
+                    if (!file_exists($section_path . '/' . $section_id . '/encrypt_content.txt')) {
+                        echo $prefix_log . ' Store book section [' . $section_id . ']: ' . $section_title . "\n";
                         $encrypt_content = file_get_contents($section['osspath']);
                         file_put_contents($section_path . '/' . $section_id . '/encrypt_content.txt', $encrypt_content);
                         file_put_contents($section_path . '/' . $section_id . '/encrypt_key.txt', $section['amd5']);
@@ -140,7 +142,7 @@ foreach ($languages as $language) {
                     unlink($section_path . '/' . $section_id . '/encrypt_content.txt');
                     unlink($section_path . '/' . $section_id . '/encrypt_key.txt');
 
-                    $new_chap_update_msg = "----------------\nTruyện *" . $book_name . "* Cập nhật!\n" . $section_title . "\nLink: https://anynovel.net/read/$book_id/$section_id";
+                    $new_chap_update_msg .= "\n----------------\nTruyện *" . $book_name . "* Cập nhật!\n" . $section_title . "\nLink: https://anynovel.net/read/$book_id/$section_id";
 
                     // TODO: send notify to user
 //                     } else {
