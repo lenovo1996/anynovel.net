@@ -55,13 +55,27 @@ function autoScroll() {
     }
 }
 
-let GAEventIntv = null;
-
 function sendGAEventAds() {
-    GAEventIntv = setInterval(function () {
-        gtag('event', 'Show Ads', {
-            'event_category': 'Show Ads',
-            'event_label': 'Show Ads'
-        });
-    }, 5000);
+    let timeout = Cookies.get('intv-gtag-ads');
+
+    if (!timeout) {
+        timeout = '30000';
+    }
+
+    timeout = parseInt(timeout);
+
+    setTimeout(function () {
+        timeout = timeout - 1000;
+        Cookies.set('intv-gtag-ads', timeout, {expires: 365});
+
+        if (timeout <= 0) {
+            gtag('event', 'Show Ads', {
+                'event_category': 'Show Ads',
+                'event_label': 'Show Ads'
+            });
+            Cookies.set('intv-gtag-ads', '30000', {expires: 365});
+        }
+
+        sendGAEventAds();
+    }, 1000);
 }
