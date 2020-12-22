@@ -120,6 +120,11 @@ foreach ($languages as $language) {
                     if (!file_exists($section_path . '/' . $section_id)) {
                         mkdir($section_path . '/' . $section_id, 0777, true);
                     }
+
+                    if (file_exists($section_path . '/' . $section_id . '/content.txt')) {
+                        continue;
+                    }
+
                     if (!file_exists($section_path . '/' . $section_id . '/encrypt_content.txt')) {
                         echo $prefix_log . ' Store book section [' . $section_id . ']: ' . $section_title . "\n";
                         $encrypt_content = file_get_contents($section['osspath']);
@@ -128,9 +133,6 @@ foreach ($languages as $language) {
                         file_put_contents($section_path . '/' . $section_id . '/detail.json', json_encode($section));
                     }
 
-                    if (file_exists($section_path . '/' . $section_id . '/content.txt')) {
-                        continue;
-                    }
 
                     echo $prefix_log . ' Decrypt [' . $section_id . ']: ' . $section_title . "\n";
                     $content = decrypt_section($section_path . '/' . $section_id);
