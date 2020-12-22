@@ -17,6 +17,7 @@ $channels = [1, 2];
 
 $book_list_data = [];
 
+file_put_contents('updated.txt', '');
 foreach ($languages as $language) {
     if (isset($_GET['lang']) && $language != $_GET['lang']) {
         continue;
@@ -94,6 +95,7 @@ foreach ($languages as $language) {
                 $section_list = file_get_contents($store_path . '/sections.json');
                 $section_list = []; // json_decode($section_list, true);
                 $new_chap_update_msg = file_get_contents('updated.txt');
+                $new_chap_update_msg2 = '';
                 foreach ($section_arr['data'] as $section) {
                     $section_id = $section['section_id'];
                     $section_title = $section['title'];
@@ -144,13 +146,14 @@ foreach ($languages as $language) {
                     unlink($section_path . '/' . $section_id . '/encrypt_content.txt');
                     unlink($section_path . '/' . $section_id . '/encrypt_key.txt');
 
-                    $new_chap_update_msg .= "\n----------------\nTruyện *" . $book_name . "* Cập nhật!\n" . $section_title . "\nLink: https://anynovel.net/read/$book_id/$section_id";
+                    $new_chap_update_msg2 = "\n----------------\nTruyện *" . $book_name . "* Cập nhật!\n" . $section_title . "\nLink: https://anynovel.net/read/$book_id/$section_id";
 
                     // TODO: send notify to user
 //                     } else {
 // //                        echo 'Existed book section: ' . $section_title . " => $section_path/$section_id\n";
 //                     }
                 }
+                $new_chap_update_msg .= $new_chap_update_msg2;
                 file_put_contents('updated.txt', $new_chap_update_msg);
 
 
