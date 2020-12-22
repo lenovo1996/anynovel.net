@@ -59,7 +59,7 @@ function sendGAEventAds() {
     let timeout = Cookies.get('intv-gtag-ads');
 
     if (!timeout) {
-        timeout = '30000';
+        timeout = '300000';
     }
 
     timeout = parseInt(timeout);
@@ -73,7 +73,7 @@ function sendGAEventAds() {
                 'event_category': 'Show Ads',
                 'event_label': 'Show Ads'
             });
-            Cookies.set('intv-gtag-ads', '30000', {expires: 365});
+            Cookies.set('intv-gtag-ads', '300000', {expires: 365});
         }
 
         sendGAEventAds();
