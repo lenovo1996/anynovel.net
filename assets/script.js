@@ -19,6 +19,13 @@ $(document).on("click", ".setting", function () {
     autoScroll();
 });
 
+
+$(document).on("click", ".close-ads", function () {
+    $('.ads-block').fadeOut();
+    $('body').removeClass('show-ads');
+    Cookies.set('intv-gtag-ads', '300000', {expires: 365});
+});
+
 $(document).on("click", ".switch-mode", function () {
     let mode = Cookies.get("mode");
 
@@ -69,6 +76,8 @@ function sendGAEventAds() {
         Cookies.set('intv-gtag-ads', timeout, {expires: 365});
 
         if (timeout <= 0) {
+            $('.ads-block').fadeIn();
+            $('body').addClass('show-ads');
             gtag('event', 'Show Ads', {
                 'event_category': 'Show Ads',
                 'event_label': 'Show Ads'

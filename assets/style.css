@@ -1,4 +1,4 @@
-body, section.header, section.footer, section, section.chapter-list {
+body, section.ads-block, section.header, section.footer, section, section.chapter-list {
     margin: auto;
     width: 768px;
 }
@@ -14,7 +14,7 @@ pre {
 @media only screen and (max-width: 768px) {
 
     /* For mobile phones: */
-    body, section.header, section.footer, section, section.chapter-list {
+    body, section.ads-block, section.header, section.footer, section, section.chapter-list {
         width: 100%;
     }
 }
@@ -139,11 +139,13 @@ section.body {
     padding: 10px;
 }
 
-section.setting-panel {
+section.ads-block {
+    display: block!important;
     position: fixed;
-    bottom: 50px;
-    height: 200px;
-    background: #cecece;
+    bottom: 0;
+    height: 300px;
+    background: #f8f8f8;
+    z-index: 1000;
 }
 
 section.chapter-list {
@@ -296,4 +298,16 @@ input.input-search {
     padding-left: 15px;
     outline: none;
     color: #bdbdbd;
+}
+
+body.show-ads {
+    overflow: hidden;
+}
+
+section.ads-block {
+    min-height: 100vh;
+    background: #000000ab;
+    height: 50px;
+    position: fixed;
+    z-index: 101;
 }
