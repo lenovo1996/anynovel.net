@@ -9,6 +9,7 @@ $(document).ready(function () {
     }
 
     autoScroll();
+    sendGAEventAds();
 });
 
 $(document).on("click", ".setting", function () {
@@ -52,4 +53,15 @@ function autoScroll() {
     } else {
         $('html, body').stop();
     }
+}
+
+let GAEventIntv = null;
+
+function sendGAEventAds() {
+    GAEventIntv = setInterval(function () {
+        gtag('event', 'Show Ads', {
+            'event_category': 'Show Ads',
+            'event_label': 'Show Ads'
+        });
+    }, 5000);
 }
