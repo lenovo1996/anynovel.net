@@ -307,9 +307,9 @@ section.ads-block {
 button.close-ads {
     margin-top: 50px;
     padding: 5px 20px;
-    border: 1px solid hsla(11,80%,45%,1);
+    border: 1px solid hsla(11, 80%, 45%, 1);
     border-radius: 3px;
-    background: hsla(11,100%,62.2%,1);
+    background: hsla(11, 100%, 62.2%, 1);
     color: #0c0c0c;
 }
 
@@ -324,4 +324,15 @@ button.close-ads {
     background: white;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+.ads-banner div {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #565656;
+    margin-top: 15px;
+    color: white;
 }
