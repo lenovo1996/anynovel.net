@@ -76,8 +76,8 @@ function sendGAEventAds() {
         Cookies.set('intv-gtag-ads', timeout, {expires: 365});
 
         if (timeout <= 0) {
-            $('.ads-block').fadeIn();
-            $('body').addClass('show-ads');
+            //$('.ads-block').fadeIn();
+            //$('body').addClass('show-ads');
             gtag('event', 'Show Ads', {
                 'event_category': 'Show Ads',
                 'event_label': 'Show Ads'
