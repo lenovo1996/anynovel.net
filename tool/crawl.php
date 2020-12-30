@@ -147,10 +147,7 @@ foreach ($languages as $language) {
                     unlink($section_path . '/' . $section_id . '/encrypt_key.txt');
 
                     if ($key >= count($section_arr['data']) - 1) {
-                        $url = urlencode("https://lenovo1996.github.io/read/$book_id/$section_id");
-                        $json = file_get_contents('https://cutt.ly/api/api.php?key=e525ce8131566bb4f76f2bba6193dc81b70e9&short=' . $url);
-                        $data = json_decode ($json, true);
-                        $url = $data['url']['shortLink'];
+                        $url = "http://truyenhay.link/read/$book_id/$section_id";
                         $new_chap_update_msg2 = "\n----------------\nTruyện *" . $book_name . "* Cập nhật!\n" . $section_title . "\nLink: " . $url;
                     }
 
