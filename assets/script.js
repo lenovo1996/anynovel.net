@@ -8,7 +8,7 @@ $(document).ready(function () {
         $('.setting').addClass('auto-scroll');
     }
 
-    autoScroll();
+    //autoScroll();
     sendGAEventAds();
 });
 
