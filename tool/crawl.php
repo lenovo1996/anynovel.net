@@ -96,7 +96,7 @@ foreach ($languages as $language) {
                 $section_list = []; // json_decode($section_list, true);
                 $new_chap_update_msg = file_get_contents('updated.txt');
                 $new_chap_update_msg2 = '';
-                foch ($section_arr['data'] as $key => $section) {
+                foreach ($section_arr['data'] as $key => $section) {
                     $section_id = $section['section_id'];
                     $section_title = $section['title'];
 
