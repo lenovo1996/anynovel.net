@@ -69,6 +69,7 @@ section.footer {
 
 .footer-content {
     margin: 10px;
+    text-align: center;
 }
 
 .header-content {
@@ -80,6 +81,20 @@ section.footer {
     width: 30px;
     display: inline-block;
     cursor: pointer;
+}
+
+.next-icon {
+    background: url('./icons/next.png');
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+}
+
+.prev-icon {
+    background: url('./icons/previous.png');
+    height: 100%;
+    width: 100%;
+    background-size: contain;
 }
 
 .setting-icon {

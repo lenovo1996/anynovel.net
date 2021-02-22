@@ -35,16 +35,16 @@ $(document).on("click", ".switch-mode", function () {
         Cookies.set("mode", "night", {expires: 365});
         $("body").addClass("night");
     } else {
-        Cookies.set("mode", "day", {expires: 365});
-        $("body").addClass("day");
+        Cookies.set("mode", "night", {expires: 365});
+        $("body").addClass("night");
     }
 });
 
 function setMode() {
     let mode = Cookies.get("mode");
     if (!mode) {
-        Cookies.set("mode", "day", {expires: 365});
-        $("body").addClass("day");
+        Cookies.set("mode", "night", {expires: 365});
+        $("body").addClass("night");
     } else {
         $("body").removeClass("day night");
         $("body").addClass(mode);

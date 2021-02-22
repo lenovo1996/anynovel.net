@@ -24,6 +24,21 @@ $(document).on("click", '.chapter-list-btn', function () {
     }
 });
 
+$(document).on("click", '.prev-chapter-btn', function () {
+    if ($('.chapter.active').prev().length > 0) {
+        let link = $('.chapter.active').prev().find('a').attr('href');
+        window.location.href = link;
+    }
+});
+
+$(document).on("click", '.next-chapter-btn', function () {
+    console.log($('.chapter.active'))
+    if ($('.chapter.active').next().length > 0) {
+        let link = $('.chapter.active').next().find('a').attr('href');
+        window.location.href = link;
+    }
+});
+
 let Controller = {
     getBook() {
         Controller.loadInfo();
@@ -77,6 +92,12 @@ let Controller = {
                 });
                 $('.chapter-list').html(html);
                 $(`.section-${section_id}`).addClass('active');
+                if ($('.chapter.active').next().length == 0) {
+                    $('.next-chapter-btn').closest('div').hide();
+                }
+                if ($('.chapter.active').prev().length == 0) {
+                    $('.prev-chapter-btn').closest('div').hide();
+                }
             });
     },
 
