@@ -35,8 +35,8 @@ $(document).on("click", ".switch-mode", function () {
         Cookies.set("mode", "night", {expires: 365});
         $("body").addClass("night");
     } else {
-        Cookies.set("mode", "night", {expires: 365});
-        $("body").addClass("night");
+        Cookies.set("mode", "day", {expires: 365});
+        $("body").addClass("day");
     }
 });
 
