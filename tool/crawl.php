@@ -106,9 +106,6 @@ foreach ($languages as $language) {
                     ];
 
                     if (empty($section['osspath'])) {
-                        echo "-----------------\n";
-                        echo $prefix_log . ' Book section empty: ' . $book_name . " => $section_id\n";
-                        echo "-----------------\n";
                         continue;
                     }
 
