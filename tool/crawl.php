@@ -17,7 +17,6 @@ $channels = [1, 2];
 
 $book_list_data = [];
 
-file_put_contents('updated.txt', '');
 foreach ($languages as $language) {
     if (isset($_GET['lang']) && $language != $_GET['lang']) {
         continue;
@@ -29,7 +28,8 @@ foreach ($languages as $language) {
         if (isset($_GET['channel']) && $channel != $_GET['channel']) {
             continue;
         }
-        // get danh sach truyen
+
+        // lấy danh sách truyện
         $page = 1;
         while (true) {
             $fields = [
@@ -47,16 +47,18 @@ foreach ($languages as $language) {
                 $book_name = $book['book_name'];
                 $fields = ['book_id' => $book_id];
 
+                // t̀m theo book id
                 if (isset($_GET['book_id']) && $book_id != $_GET['book_id']) {
                     continue;
                 }
+                // tìm theo từ khóa
                 if (isset($_GET['search']) && strpos(mb_strtolower($book_name, 'UTF-8'), mb_strtolower($_GET['search'], 'UTF-8')) === false) {
                     continue;
                 }
 
                 $prefix_log = '[LANG ' . strtolower($language) . '][CHANNEL ' . $channel . '][PAGE ' . $page . '][BOOK_ID ' . $book_id . ']';
-                $book_res = scurl('api/book/detail', $fields, $headers);
-                $book_arr = json_decode($book_res, true);
+                $book_resonse = scurl('api/book/detail', $fields, $headers);
+                $book_arr = json_decode($book_resonse, true);
                 $store_path = '../storage/' . implode('/', [$language, $book_id]);
                 $section_path = $store_path . '/sections';
                 if (!file_exists($store_path)) {
@@ -94,8 +96,6 @@ foreach ($languages as $language) {
                 }
                 $section_list = file_get_contents($store_path . '/sections.json');
                 $section_list = []; // json_decode($section_list, true);
-                $new_chap_update_msg = file_get_contents('updated.txt');
-                $new_chap_update_msg2 = '';
                 foreach ($section_arr['data'] as $key => $section) {
                     $section_id = $section['section_id'];
                     $section_title = $section['title'];
@@ -114,7 +114,6 @@ foreach ($languages as $language) {
                         'title' => $section_title
                     ];
 
-                    // if (!file_exists($section_path . '/' . $section_id)) {
                     // save section and encrypt content
                     if (!file_exists($section_path . '/' . $section_id)) {
                         mkdir($section_path . '/' . $section_id, 0777, true);
@@ -140,95 +139,16 @@ foreach ($languages as $language) {
                         'title' => $section_title
                     ];
 
-
-                    if (!file_exists(date('d-m-Y') . '/' . $book_name)) {
-                        mkdir(date('d-m-Y') . '/' . $book_name, 0777, true);
-                    }
-                    file_put_contents(date('d-m-Y') . '/' . $book_name . '/' . $section_title . '.txt', $content);
-
-
                     file_put_contents($section_path . '/' . $section_id . '/content.txt', $content);
                     unlink($section_path . '/' . $section_id . '/encrypt_content.txt');
                     unlink($section_path . '/' . $section_id . '/encrypt_key.txt');
-
-                    if ($key >= count($section_arr['data']) - 1) {
-                        $url = "http://truyenhay.link/read/$book_id/$section_id";
-                        $new_chap_update_msg2 = "\n----------------\nTruyện *" . $book_name . "* Cập nhật!\n" . $section_title . "\nLink: " . $url;
-                    }
-
-                    // TODO: send notify to user
-//                     } else {
-// //                        echo 'Existed book section: ' . $section_title . " => $section_path/$section_id\n";
-//                     }
                 }
-                $new_chap_update_msg .= $new_chap_update_msg2;
-                file_put_contents('updated.txt', $new_chap_update_msg);
-
-
                 file_put_contents($store_path . '/sections.json', json_encode($section_list));
             }
             $page++;
         }
     }
     file_put_contents('../storage/' . $language . '/book_list.json', json_encode($book_list_data));
-}
-
-
-// Get real path for our folder
-$rootPath = realpath(date('d-m-Y'));
-
-// Initialize archive object
-$zip = new ZipArchive();
-$zip->open(date('d-m-Y') . '-hinovel.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE);
-
-// Create recursive directory iterator
-/** @var SplFileInfo[] $files */
-$files = new RecursiveIteratorIterator(
-    new RecursiveDirectoryIterator($rootPath),
-    RecursiveIteratorIterator::LEAVES_ONLY
-);
-
-foreach ($files as $name => $file)
-{
-    // Skip directories (they would be added automatically)
-    if (!$file->isDir())
-    {
-        // Get real and relative path for current file
-        $filePath = $file->getRealPath();
-        $relativePath = substr($filePath, strlen($rootPath) + 1);
-
-        // Add current file to archive
-        $zip->addFile($filePath, $relativePath);
-    }
-}
-
-// Zip archive will be created only after closing object
-$zip->close();
-
-function rebrand($url) {
-    // Generated by curl-to-PHP: http://incarnate.github.io/curl-to-php/
-    $ch = curl_init();
-
-    $data = [
-        'destination' => $url,
-        'domain' => [
-            'fullName' => 'rebrand.ly'
-        ]
-    ];
-
-    curl_setopt($ch, CURLOPT_URL, 'https://api.rebrandly.com/v1/links');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-
-    $headers = array();
-    $headers[] = 'Content-Type: application/json';
-    $headers[] = 'Apikey: 5bab43ac14ac4a828171301104aaa820';
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    $result = json_decode($result,true);
-    return $result['shortUrl'];
 }
 
 function scurl($path, $fields = false, $request_headers = [])
