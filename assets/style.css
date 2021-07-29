@@ -201,11 +201,18 @@ section.chapter-list {
     color: #f2ebeb;
 }
 
-.book-detail {
+.day .book_detail {
+    border: 1px solid #b6b6b6;
+    background: #d8d8d8;
+}
+
+.night .book_detail {
     border: 1px solid gray;
+    background: #222222;
+}
+.book-detail {
     padding: 10px;
     border-radius: 5px;
-    background: #222222;
     margin-bottom: 15px;
 }
 
@@ -294,12 +301,20 @@ div.score {
     margin: 10px;
 }
 
+.day input.input-search {
+    background: #d8d8d8;
+    border: 1px solid #bebebe;
+}
+
+.night input.input-search {
+    background: #222222;
+    border: 1px solid gray;
+}
+
 input.input-search {
     height: 30px;
     width: 100%;
     width: -webkit-fill-available;
-    background: #222222;
-    border: 1px solid gray;
     border-radius: 16px;
     padding-left: 15px;
     outline: none;
