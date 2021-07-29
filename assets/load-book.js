@@ -19,6 +19,10 @@ $(document).ready(function () {
 $(document).on("click", '.chapter-list-btn', function () {
     if ($('.chapter-list').is(':hidden')) {
         $('.chapter-list').fadeIn();
+	$('.chapter-list').animate({
+	  scrollTop: $(".chapter.active")[0].offsetTop
+	});
+
     } else {
         $('.chapter-list').fadeOut();
     }
@@ -32,7 +36,6 @@ $(document).on("click", '.prev-chapter-btn', function () {
 });
 
 $(document).on("click", '.next-chapter-btn', function () {
-    console.log($('.chapter.active'))
     if ($('.chapter.active').next().length > 0) {
         let link = $('.chapter.active').next().find('a').attr('href');
         window.location.href = link;
